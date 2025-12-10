@@ -1,10 +1,19 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 from sped_processor import processar_sped
 import uuid
-import os
 
 app = FastAPI()
+
+# --- CORS LIBERADO ---
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # se quiser, posso limitar ao domínio do Render
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/corrigir")
 async def corrigir_sped(file: UploadFile = File(...)):
