@@ -1,3 +1,9 @@
+// Mensagem ao selecionar arquivo
+document.getElementById("fileInput").addEventListener("change", () => {
+    const msg = document.getElementById("arquivo-msg");
+    msg.textContent = "Arquivo selecionado ✔️";
+});
+
 document.getElementById("btnEnviar").addEventListener("click", async () => {
 
     const fileInput = document.getElementById("fileInput");

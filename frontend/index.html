@@ -10,15 +10,21 @@
 <h1 class="titulo">Correção de SPED</h1>
 
 <div class="controles">
-    <label for="fileInput" class="file-label">Selecionar Arquivo</label>
+
+    <!-- Botão estilizado do input file -->
+    <label for="fileInput" class="upload-btn">Selecionar Arquivo</label>
     <input type="file" id="fileInput" accept=".txt">
 
-    <button id="btnEnviar" class="btn">Enviar e Corrigir</button>
+    <!-- Mensagem q aparece ao selecionar arquivo -->
+    <p id="arquivo-msg"></p>
+
+    <!-- Botão Enviar -->
+    <button id="btnEnviar" class="upload-btn">Enviar e Corrigir</button>
 
     <p id="mensagem"></p>
 
     <a id="downloadLink" style="display:none;" download="SPED_corrigido.txt">
-        <button class="btn secundario">Baixar Arquivo Corrigido</button>
+        <button class="upload-btn">Baixar Arquivo Corrigido</button>
     </a>
 </div>
 
