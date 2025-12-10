@@ -15,7 +15,7 @@ document.getElementById("btnEnviar").addEventListener("click", async () => {
     formData.append("file", fileInput.files[0]);
 
     // ---- ALTERE A URL AQUI ----
-    const API_URL = "https://SEU-NOME-DA-API.onrender.com/corrigir";
+    const API_URL = "https://sped-6762.onrender.com";
 
     const response = await fetch(API_URL, {
         method: "POST",
