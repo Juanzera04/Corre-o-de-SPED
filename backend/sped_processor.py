@@ -46,7 +46,7 @@ def processar_sped(arquivo_entrada, arquivo_saida):
         c100_campos[TARGET_COF_C100_IDX] = f"{total_cofins:.2f}".replace(".", ",")
 
         # Garantir três campos vazios no final do C100
-        c100_campos += ["", "", ""]
+        c100_campos += ["", ""]
 
         saida.append(montar_linha(c100_campos))
 
