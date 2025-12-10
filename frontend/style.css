@@ -23,22 +23,25 @@ body {
 
 /* ====== BOTÕES PADRÃO (TODOS USAM ESSE) ====== */
 .upload-btn {
-    display: inline-flex;
+    display: inline-flex !important;
     align-items: center;
     justify-content: center;
     gap: 8px;
     background: linear-gradient(135deg, #1d4ed8, #3b82f6);
     color: #fff;
-    padding: 12px 22px;
+    padding: 12px 0;             /* <<< remove variação de largura */
     border-radius: 8px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
-    min-width: 190px;
+    width: 220px;                /* <<< largura fixa REAL */
     border: none;
     font-size: 16px;
     text-decoration: none;
+    box-sizing: border-box;      /* <<< evita expansão acidental */
+    white-space: nowrap;         /* <<< impede de quebrar linha */
 }
+
 
 .upload-btn:hover {
     background: linear-gradient(135deg, #2563eb, #60a5fa);
