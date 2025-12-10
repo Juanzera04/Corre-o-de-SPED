@@ -10,6 +10,7 @@ document.getElementById("btnEnviar").addEventListener("click", async () => {
     }
 
     mensagem.textContent = "Enviando, aguarde...";
+    downloadLink.style.display = "none";
 
     const formData = new FormData();
     formData.append("file", fileInput.files[0]);

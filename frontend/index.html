@@ -2,25 +2,27 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Correção SPED</title>
+    <title>Correção de SPED</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
+<h1 class="titulo">Correção de SPED</h1>
 
-    <h2>Correção de SPED</h2>
-
+<div class="controles">
+    <label for="fileInput" class="file-label">Selecionar Arquivo</label>
     <input type="file" id="fileInput" accept=".txt">
-    <button id="btnEnviar">Enviar e Corrigir</button>
+
+    <button id="btnEnviar" class="btn">Enviar e Corrigir</button>
 
     <p id="mensagem"></p>
 
     <a id="downloadLink" style="display:none;" download="SPED_corrigido.txt">
-        <button>Baixar Arquivo Corrigido</button>
+        <button class="btn secundario">Baixar Arquivo Corrigido</button>
     </a>
-
 </div>
+
+<footer class="rodape">Desenvolvido por Juan Rodrigues</footer>
 
 <script src="script.js"></script>
 </body>
