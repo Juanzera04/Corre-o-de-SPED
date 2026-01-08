@@ -2,8 +2,8 @@ def processar_sped(arquivo_entrada, arquivo_saida):
 
     PIS_IDX = 29       # índice 0-based no C170
     COFINS_IDX = 35    # índice 0-based no C170
-    C175_PIS_IDX = 10     # coluna 10
-    C175_COF_IDX = 16    # coluna 16
+    C175_PIS_IDX = 9     # coluna 10
+    C175_COF_IDX = 15    # coluna 16
 
     TARGET_PIS_C100_IDX = 25   # onde escrever no C100
     TARGET_COF_C100_IDX = 26
