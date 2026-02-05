@@ -2,6 +2,8 @@ def processar_sped(arquivo_entrada, arquivo_saida):
 
     PIS_IDX = 29       # índice 0-based no C170
     COFINS_IDX = 35    # índice 0-based no C170
+    C175_PIS_IDX = 9     # coluna 10
+    C175_COF_IDX = 15    # coluna 16
 
     TARGET_PIS_C100_IDX = 25   # onde escrever no C100
     TARGET_COF_C100_IDX = 26
@@ -76,6 +78,23 @@ def processar_sped(arquivo_entrada, arquivo_saida):
 
             pis = to_float_safe(campos[PIS_IDX])
             cof = to_float_safe(campos[COFINS_IDX])
+
+            if pis is not None:
+                total_pis += pis
+            if cof is not None:
+                total_cofins += cof
+
+            bloco_atual.append(linha)
+
+        elif linha.startswith("|C175"):
+            campos = parse_line(linha)
+
+            max_needed = max(C175_PIS_IDX, C175_COF_IDX)
+            if len(campos) <= max_needed:
+                campos += [""] * (max_needed + 1 - len(campos))
+
+            pis = to_float_safe(campos[C175_PIS_IDX])
+            cof = to_float_safe(campos[C175_COF_IDX])
 
             if pis is not None:
                 total_pis += pis
