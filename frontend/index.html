@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>SPED Tools</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>SPED Fiscal</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
 
-  <div class="box">
-    <h2>Cálculo de PIS e COFINS</h2>
-    <input type="file" id="filePis">
-    <button onclick="enviarPis()">Processar</button>
-  </div>
+    <div class="box">
+        <h2>Cálculo de PIS e COFINS</h2>
+        <input type="file" id="pisFile">
+        <button onclick="processarPisCofins('pisFile')">Processar</button>
 
-  <div class="box">
-    <h2>Remover C175 duplicados</h2>
-    <input type="file" id="fileC175">
-    <button onclick="enviarC175()">Processar</button>
-  </div>
+    </div>
+
+    <div class="box">
+        <h2>Remover C175 duplicados</h2>
+        <input type="file" id="c175File">
+        <button onclick="processarC175('c175File')">Processar</button>
+    </div>
 
 </div>
 

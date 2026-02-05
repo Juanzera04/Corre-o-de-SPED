@@ -1,72 +1,47 @@
-const API_BASE = "https://SEU-BACKEND.onrender.com";
+const API = "https://SEU-BACKEND.onrender.com";
 
-// ===============================
-// PIS / COFINS
-// ===============================
-async function enviarPisCofins() {
+function processarPisCofins(inputId) {
+    const input = document.getElementById(inputId);
+    if (!input.files.length) {
+        alert("Selecione um arquivo");
+        return;
+    }
 
-  const input = document.getElementById("fileInputPis");
-  if (!input.files.length) {
-    alert("Selecione um arquivo SPED");
-    return;
-  }
+    const form = new FormData();
+    form.append("file", input.files[0]);
 
-  const formData = new FormData();
-  formData.append("file", input.files[0]);
-
-  const response = await fetch(`${API_BASE}/corrigir`, {
-    method: "POST",
-    body: formData
-  });
-
-  if (!response.ok) {
-    alert("Erro ao processar o arquivo");
-    return;
-  }
-
-  baixarArquivo(response, "SPED_PISCOFINS.txt");
+    fetch(`${API}/corrigir`, {
+        method: "POST",
+        body: form
+    })
+    .then(r => r.blob())
+    .then(b => download(b, "SPED_corrigido.txt"))
+    .catch(e => alert(e));
 }
 
-// ===============================
-// CONSOLIDAR C175
-// ===============================
-async function enviarC175() {
+function processarC175(inputId) {
+    const input = document.getElementById(inputId);
+    if (!input.files.length) {
+        alert("Selecione um arquivo");
+        return;
+    }
 
-  const input = document.getElementById("fileInputC175");
-  if (!input.files.length) {
-    alert("Selecione um arquivo SPED");
-    return;
-  }
+    const form = new FormData();
+    form.append("file", input.files[0]);
 
-  const formData = new FormData();
-  formData.append("file", input.files[0]);
-
-  const response = await fetch(`${API_BASE}/consolidar-c175`, {
-    method: "POST",
-    body: formData
-  });
-
-  if (!response.ok) {
-    alert("Erro ao processar o arquivo");
-    return;
-  }
-
-  baixarArquivo(response, "SPED_C175.txt");
+    fetch(`${API}/consolidar-c175`, {
+        method: "POST",
+        body: form
+    })
+    .then(r => r.blob())
+    .then(b => download(b, "SPED_C175.txt"))
+    .catch(e => alert(e));
 }
 
-// ===============================
-// DOWNLOAD
-// ===============================
-async function baixarArquivo(response, nomeArquivo) {
-  const blob = await response.blob();
-  const url = window.URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = nomeArquivo;
-  document.body.appendChild(a);
-  a.click();
-
-  document.body.removeChild(a);
-  window.URL.revokeObjectURL(url);
+function download(blob, nome) {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = nome;
+    a.click();
+    URL.revokeObjectURL(a.href);
 }
