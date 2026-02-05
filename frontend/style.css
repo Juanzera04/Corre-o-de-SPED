@@ -97,3 +97,26 @@ body {
         transform: rotate(360deg);
     }
 }
+
+/* ====== CONTAINER 2 COLUNAS ====== */
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+/* ====== PAINEL ====== */
+.painel {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 14px;
+    width: 360px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.painel h2 {
+    margin-bottom: 25px;
+    font-size: 1.3rem;
+}

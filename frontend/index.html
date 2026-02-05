@@ -1,36 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Correção de SPED</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>SPED Tools</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1 class="titulo">Correção de SPED</h1>
+<div class="container">
 
-<div class="controles">
+  <div class="box">
+    <h2>Cálculo de PIS e COFINS</h2>
+    <input type="file" id="filePis">
+    <button onclick="enviarPis()">Processar</button>
+  </div>
 
-    <!-- Botão estilizado do input file -->
-    <label for="fileInput" class="upload-btn">Selecionar Arquivo</label>
-    <input type="file" id="fileInput" accept=".txt">
+  <div class="box">
+    <h2>Remover C175 duplicados</h2>
+    <input type="file" id="fileC175">
+    <button onclick="enviarC175()">Processar</button>
+  </div>
 
-    <!-- Mensagem q aparece ao selecionar arquivo -->
-    <p id="arquivo-msg"></p>
-
-    <!-- Botão Enviar -->
-    <button id="btnEnviar" class="upload-btn">Enviar e Corrigir</button>
-
-    <p id="mensagem"></p>
-    <div id="loader" class="loader" style="display:none;"></div>
-
-
-    <a id="downloadLink" style="display:none;" download="SPED_corrigido.txt">
-        <button class="upload-btn">Baixar Arquivo Corrigido</button>
-    </a>
 </div>
-
-<footer class="rodape">Desenvolvido por Juan Rodrigues</footer>
 
 <script src="script.js"></script>
 </body>
