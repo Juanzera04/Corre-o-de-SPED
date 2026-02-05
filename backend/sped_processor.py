@@ -44,8 +44,16 @@ def processar_sped(arquivo_entrada, arquivo_saida):
         if len(c100_campos) < tamanho_necessario:
             c100_campos += [""] * (tamanho_necessario - len(c100_campos))
 
-        c100_campos[TARGET_PIS_C100_IDX] = f"{total_pis:.2f}".replace(".", ",")
-        c100_campos[TARGET_COF_C100_IDX] = f"{total_cofins:.2f}".replace(".", ",")
+        if total_pis > 0:
+            c100_campos[TARGET_PIS_C100_IDX] = f"{total_pis:.2f}".replace(".", ",")
+        else:
+            c100_campos[TARGET_PIS_C100_IDX] = ""
+
+        if total_cofins > 0:
+            c100_campos[TARGET_COF_C100_IDX] = f"{total_cofins:.2f}".replace(".", ",")
+        else:
+            c100_campos[TARGET_COF_C100_IDX] = ""
+
 
         # Garantir três campos vazios no final do C100
         c100_campos += ["", ""]
