@@ -1,33 +1,59 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-from sped_processor import processar_sped
+from sped_processor import processar_sped, consolidar_c175
 import uuid
 
 app = FastAPI()
 
-# --- CORS LIBERADO ---
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # se quiser, posso limitar ao domínio do Render
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# ===============================
+# PIS / COFINS
+# ===============================
+
 @app.post("/corrigir")
 async def corrigir_sped(file: UploadFile = File(...)):
-    arquivo_id = str(uuid.uuid4())
-    caminho_original = f"/tmp/{arquivo_id}.txt"
-    caminho_corrigido = f"/tmp/{arquivo_id}_corrigido.txt"
 
-    with open(caminho_original, "wb") as f:
-        f.write(file.file.read())
+    uid = str(uuid.uuid4())
+    entrada = f"/tmp/{uid}.txt"
+    saida = f"/tmp/{uid}_corrigido.txt"
 
-    processar_sped(caminho_original, caminho_corrigido)
+    with open(entrada, "wb") as f:
+        f.write(await file.read())
+
+    processar_sped(entrada, saida)
 
     return FileResponse(
-        caminho_corrigido,
-        filename="SPED_corrigido.txt",
+        saida,
+        filename="SPED_PISCOFINS.txt",
+        media_type="text/plain"
+    )
+
+# ===============================
+# CONSOLIDAR C175
+# ===============================
+
+@app.post("/consolidar-c175")
+async def consolidar(file: UploadFile = File(...)):
+
+    uid = str(uuid.uuid4())
+    entrada = f"/tmp/{uid}.txt"
+    saida = f"/tmp/{uid}_c175.txt"
+
+    with open(entrada, "wb") as f:
+        f.write(await file.read())
+
+    consolidar_c175(entrada, saida)
+
+    return FileResponse(
+        saida,
+        filename="SPED_C175.txt",
         media_type="text/plain"
     )

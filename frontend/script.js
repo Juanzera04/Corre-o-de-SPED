@@ -1,41 +1,72 @@
-const BASE_URL = "https://SEU-BACKEND.onrender.com";
+const API_BASE = "https://SEU-BACKEND.onrender.com";
 
-async function enviarPis() {
-  const f = document.getElementById("filePis").files[0];
-  if (!f) return alert("Selecione um arquivo");
+// ===============================
+// PIS / COFINS
+// ===============================
+async function enviarPisCofins() {
 
-  const fd = new FormData();
-  fd.append("file", f);
+  const input = document.getElementById("fileInputPis");
+  if (!input.files.length) {
+    alert("Selecione um arquivo SPED");
+    return;
+  }
 
-  const r = await fetch(`${BASE_URL}/api/pis-cofins`, {
+  const formData = new FormData();
+  formData.append("file", input.files[0]);
+
+  const response = await fetch(`${API_BASE}/corrigir`, {
     method: "POST",
-    body: fd
+    body: formData
   });
 
-  baixar(r, "SPED_PISCOFINS.txt");
+  if (!response.ok) {
+    alert("Erro ao processar o arquivo");
+    return;
+  }
+
+  baixarArquivo(response, "SPED_PISCOFINS.txt");
 }
 
+// ===============================
+// CONSOLIDAR C175
+// ===============================
 async function enviarC175() {
-  const f = document.getElementById("fileC175").files[0];
-  if (!f) return alert("Selecione um arquivo");
 
-  const fd = new FormData();
-  fd.append("file", f);
+  const input = document.getElementById("fileInputC175");
+  if (!input.files.length) {
+    alert("Selecione um arquivo SPED");
+    return;
+  }
 
-  const r = await fetch(`${BASE_URL}/api/consolidar-c175`, {
+  const formData = new FormData();
+  formData.append("file", input.files[0]);
+
+  const response = await fetch(`${API_BASE}/consolidar-c175`, {
     method: "POST",
-    body: fd
+    body: formData
   });
 
-  baixar(r, "SPED_C175.txt");
+  if (!response.ok) {
+    alert("Erro ao processar o arquivo");
+    return;
+  }
+
+  baixarArquivo(response, "SPED_C175.txt");
 }
 
-async function baixar(response, nome) {
+// ===============================
+// DOWNLOAD
+// ===============================
+async function baixarArquivo(response, nomeArquivo) {
   const blob = await response.blob();
-  const url = URL.createObjectURL(blob);
+  const url = window.URL.createObjectURL(blob);
+
   const a = document.createElement("a");
   a.href = url;
-  a.download = nome;
+  a.download = nomeArquivo;
+  document.body.appendChild(a);
   a.click();
-  URL.revokeObjectURL(url);
+
+  document.body.removeChild(a);
+  window.URL.revokeObjectURL(url);
 }
