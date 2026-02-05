@@ -1,7 +1,7 @@
 # main.py
 
 from fastapi import FastAPI
-from sped_processor import processar_sped, consolidar_c175
+from sped_processor import processar_sped, processar_c175
 
 app = FastAPI()
 
@@ -14,5 +14,5 @@ def corrigir_sped(dados: list):
 
 @app.post("/consolidar-c175")
 def consolidar(dados: list):
-    resultado = consolidar_c175(dados)
+    resultado = processar_c175(dados)
     return {"resultado": resultado}
