@@ -2,28 +2,66 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>SPED Fiscal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPED Fiscal - Processador</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-<div class="container">
+    <h1 class="titulo-principal">
+        <i class="fas fa-file-invoice-dollar icone"></i>
+        Processador SPED Fiscal
+    </h1>
 
-    <div class="box">
-        <h2>Cálculo de PIS e COFINS</h2>
-        <input type="file" id="pisFile">
-        <button onclick="processarPisCofins('pisFile')">Processar</button>
+    <div class="container">
+
+        <!-- Painel 1: Cálculo PIS/COFINS -->
+        <div class="box">
+            <h2><i class="fas fa-calculator icone"></i> Cálculo de PIS e COFINS</h2>
+            
+            <label for="pisFile" class="file-label">
+                <i class="fas fa-file-upload icone"></i>
+                Selecione o arquivo SPED
+            </label>
+            <input type="file" id="pisFile" accept=".txt">
+            
+            <div id="pisInfo" class="arquivo-info"></div>
+            
+            <button onclick="processarPisCofins('pisFile')" id="btnPis">
+                <span id="pisIcon"><i class="fas fa-cogs icone"></i></span>
+                <span id="pisText">Processar PIS/COFINS</span>
+            </button>
+            
+            <div id="pisStatus" class="status"></div>
+        </div>
+
+        <!-- Painel 2: Remover C175 duplicados -->
+        <div class="box">
+            <h2><i class="fas fa-filter icone"></i> Remover C175 Duplicados</h2>
+            
+            <label for="c175File" class="file-label">
+                <i class="fas fa-file-upload icone"></i>
+                Selecione o arquivo SPED
+            </label>
+            <input type="file" id="c175File" accept=".txt">
+            
+            <div id="c175Info" class="arquivo-info"></div>
+            
+            <button onclick="processarC175('c175File')" id="btnC175">
+                <span id="c175Icon"><i class="fas fa-compress-alt icone"></i></span>
+                <span id="c175Text">Consolidar C175</span>
+            </button>
+            
+            <div id="c175Status" class="status"></div>
+        </div>
 
     </div>
 
-    <div class="box">
-        <h2>Remover C175 duplicados</h2>
-        <input type="file" id="c175File">
-        <button onclick="processarC175('c175File')">Processar</button>
+    <div class="rodape">
+        <p>Processador SPED Fiscal © 2024 | Desenvolvido para otimização de arquivos</p>
     </div>
 
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
