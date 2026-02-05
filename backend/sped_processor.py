@@ -4,7 +4,7 @@ from decimal import Decimal
 # 1️⃣ CÁLCULO DE PIS / COFINS
 # ======================================================
 
-def processar_pis_cofins(arquivo_entrada, arquivo_saida):
+def processar_sped(arquivo_entrada, arquivo_saida):
 
     PIS_IDX = 29
     COFINS_IDX = 35
