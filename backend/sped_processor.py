@@ -69,29 +69,38 @@ def processar_sped(arquivo_entrada, arquivo_saida):
         total_pis = total_cofins = 0.0
 
     for linha in linhas:
+
         if linha.startswith("|C100"):
             salvar_bloco()
             c100_campos = parse_line(linha)
 
         elif linha.startswith("|C170"):
             campos = parse_line(linha)
+
             pis = to_float_safe(campos[PIS_IDX] if len(campos) > PIS_IDX else "")
             cof = to_float_safe(campos[COFINS_IDX] if len(campos) > COFINS_IDX else "")
+
             total_pis += pis or 0
             total_cofins += cof or 0
+
             bloco_atual.append(linha)
 
         elif linha.startswith("|C175"):
             campos = parse_line(linha)
+
             pis = to_float_safe(campos[C175_PIS_IDX] if len(campos) > C175_PIS_IDX else "")
             cof = to_float_safe(campos[C175_COF_IDX] if len(campos) > C175_COF_IDX else "")
+
             total_pis += pis or 0
             total_cofins += cof or 0
+
             bloco_atual.append(linha)
 
         else:
-            salvar_bloco()
-            saida.append(linha)
+            if c100_campos:
+                bloco_atual.append(linha)
+            else:
+                saida.append(linha)
 
     salvar_bloco()
 
